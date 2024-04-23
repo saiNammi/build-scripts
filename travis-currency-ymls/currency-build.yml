@@ -6,6 +6,7 @@ language: shell
 branches:
   only:
   - master
+  - test_ubi_format
 
 
 env:
