@@ -50,6 +50,7 @@ if !(npm install; npm audit fix --force; npm audit fix); then
     exit 1
 fi
 
+
 # Run the test cases
 if ! npm test; then
     echo "------------------$PACKAGE_NAME:build_success_but_test_fails---------------------"
