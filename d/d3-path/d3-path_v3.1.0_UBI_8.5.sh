@@ -4,7 +4,7 @@
 # Package       : d3-path
 # Version       : v3.1.0
 # Source repo   : https://github.com/d3/d3-path
-# Tested on     : UBI: 8.5
+# Tested on     : UBI: 9.3
 # Language      : Javascript
 # Travis-Check  : True
 # Script License: Apache License, Version 2 or later
