@@ -176,6 +176,7 @@ def trigger_build_validation_travis(pr_number):
         status = i.get('status', "")
         if file_name.endswith('.sh') and "dockerfile" not in file_name.lower() and status != "removed":
             # perform basic validation check
+            print("Basic validation check function triggered")
             trigger_basic_validation_checks(file_name)
             
             #check Travis-check from package header  
