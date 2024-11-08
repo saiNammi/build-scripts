@@ -56,7 +56,9 @@ source pyproj-env/bin/activate
 export PROJ_DIR=../proj.4/build
 export PROJ_LIBDIR=../proj.4/build/lib
 export PROJ_INCDIR=../proj.4/src
-export PROJ_DATA=../proj.4/build/data
+export PROJ_DATA=/proj.4/build/data
+#export LD_LIBRARY_PATH=$PROJ_LIBDIR:$LD_LIBRARY_PATH
+
 
 # build and install
 if ! python3 -m pip install . ; then
@@ -72,7 +74,9 @@ else
 fi
 
 # test using import and printing version
-cd ..
+#cd ..
+#ls ../proj.4/build/lib/libproj.so.25
+
 python3 -c "import pyproj; pyproj.show_versions()"
 if [ $? == 0 ]; then
         echo "------------------$PACKAGE_NAME:test_success-------------------------"
