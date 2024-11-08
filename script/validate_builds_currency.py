@@ -86,7 +86,7 @@ def trigger_script_validation_checks(file_name,version, image_name):
         command = [
             "bash",
             "-c",
-            f"./{file_name} {version} "
+            f"cd /home/tester && ./{file_name} {version} "
         ]
         
         container = client.containers.run(
@@ -95,7 +95,7 @@ def trigger_script_validation_checks(file_name,version, image_name):
             network = 'host',
             detach = True,
             volumes = {
-                current_dir : {'bind': '/', 'mode': 'rw'}
+                current_dir : {'bind': '/home/tester', 'mode': 'rw'}
             },
             stderr = True, # Return logs from STDERR
         )
