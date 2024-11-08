@@ -74,13 +74,15 @@ else
 fi
 
 # test using import and printing version
+ls -ltr
 echo "printing current directory"
 pwd
 cd ..
 ls -ltr
 echo "printng current directory after cd .."
 pwd
-ls ../proj.4/build/lib/libproj.so.25
+ls -ltr
+ls ./proj.4/build/lib/libproj.so.25
 
 python3 -c "import pyproj; pyproj.show_versions()"
 if [ $? == 0 ]; then
