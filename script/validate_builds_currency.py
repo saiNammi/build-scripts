@@ -86,7 +86,7 @@ def trigger_script_validation_checks(file_name,version, image_name):
         command = [
             "bash",
             "-c",
-            f"cd /home/tester/ && ./{file_name} {version} "
+            f"/home/tester/{file_name} {version} "
         ]
         
         container = client.containers.run(
