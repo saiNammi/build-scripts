@@ -56,7 +56,7 @@ source pyproj-env/bin/activate
 export PROJ_DIR=../proj.4/build
 export PROJ_LIBDIR=../proj.4/build/lib
 export PROJ_INCDIR=../proj.4/src
-export PROJ_DATA=/proj.4/build/data
+export PROJ_DATA=../proj.4/build/data
 
 # build and install
 if ! python3 -m pip install . ; then
