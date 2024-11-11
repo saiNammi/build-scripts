@@ -73,8 +73,8 @@ else
 fi
 
 # test using import and printing version
-cd ..
-ls ./proj.4/build/lib
+#cd ..
+#ls ./proj.4/build/lib
 
 python3 -c "import pyproj; pyproj.show_versions()"
 if [ $? == 0 ]; then
