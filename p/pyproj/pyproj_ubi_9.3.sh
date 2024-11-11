@@ -56,8 +56,7 @@ source pyproj-env/bin/activate
 export PROJ_DIR=../proj.4/build
 export PROJ_LIBDIR=../proj.4/build/lib
 export PROJ_INCDIR=../proj.4/src
-export PROJ_DATA=/proj.4/build/data
-#export LD_LIBRARY_PATH=$PROJ_LIBDIR:$LD_LIBRARY_PATH
+export PROJ_DATA=../proj.4/build/data
 
 
 # build and install
@@ -74,15 +73,8 @@ else
 fi
 
 # test using import and printing version
-ls -ltr
-echo "printing current directory"
-pwd
 cd ..
-ls -ltr
-echo "printng current directory after cd .."
-pwd
-ls -ltr
-ls ./proj.4/build/lib/libproj.so.25
+ls ./proj.4/build/lib
 
 python3 -c "import pyproj; pyproj.show_versions()"
 if [ $? == 0 ]; then
