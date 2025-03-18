@@ -23,24 +23,24 @@ script:
 
 # jobs:
 #   include:
-#     # - stage: pr_builds
-#     #   name: package_build
-#     #   script:
-#     #     - sudo apt update -y && sudo apt-get install file -y
-#     #     - pip3 install --force-reinstall -v "requests==2.31.0"
-#     #     - pip3 install --upgrade docker
-#     #     - python3 script/validate_builds.py $TRAVIS_PULL_REQUEST > build_log &
-#     #     - SCRIPT_PID=$!;while ps -p $SCRIPT_PID > /dev/null;do echo "$SCRIPT_PID is running"; sleep 300; done; wait $SCRIPT_PID; my_pid_status=$?;
-#     #     - build_size=$(stat -c %s build_log);[ $build_size -lt 1800000 ] && cat build_log || { echo "xxxxxxxxxxxxxxx Build log size too large, so printing last 1.7MB xxxxxxxxxxxxxxx"; tail -c 1700000 build_log; }; travis_terminate $my_pid_status
+    # - stage: pr_builds
+    #   name: package_build
+    #   script:
+    #     - sudo apt update -y && sudo apt-get install file -y
+    #     - pip3 install --force-reinstall -v "requests==2.31.0"
+    #     - pip3 install --upgrade docker
+    #     - python3 script/validate_builds.py $TRAVIS_PULL_REQUEST > build_log &
+    #     - SCRIPT_PID=$!;while ps -p $SCRIPT_PID > /dev/null;do echo "$SCRIPT_PID is running"; sleep 300; done; wait $SCRIPT_PID; my_pid_status=$?;
+    #     - build_size=$(stat -c %s build_log);[ $build_size -lt 1800000 ] && cat build_log || { echo "xxxxxxxxxxxxxxx Build log size too large, so printing last 1.7MB xxxxxxxxxxxxxxx"; tail -c 1700000 build_log; }; travis_terminate $my_pid_status
 
-#     - stage: pr_builds
-#       name: "Create Wheel for Python 3.12"
-#       if: env(WHEEL_BUILD) = true
-#       env: PYTHON_VERSION="3.12"
-#       before_script:
-#         - |
-#           # Get the list of modified .sh files
-#           MODIFIED_FILES=$(git diff --name-only origin/main...HEAD -- '*.sh')
+    # - stage: pr_builds
+    #   name: "Create Wheel for Python 3.12"
+    #   if: env(WHEEL_BUILD) = true
+    #   env: PYTHON_VERSION="3.12"
+    #   before_script:
+    #     - |
+    #       # Get the list of modified .sh files
+    #       MODIFIED_FILES=$(git diff --name-only origin/main...HEAD -- '*.sh')
 
 #           if [[ -z "$MODIFIED_FILES" ]]; then
 #             echo "No build script modifications detected."
