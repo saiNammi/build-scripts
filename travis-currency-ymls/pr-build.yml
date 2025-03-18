@@ -4,6 +4,9 @@ dist: focal
 os: linux
 language: shell
 
+git:
+  depth: false
+
 services:
     - docker
 
@@ -27,9 +30,12 @@ jobs:
       name: "Create Wheel for Python 3.12"
       env: PYTHON_VERSION="3.12"
       before_script:
+        - git fetch --all
+        - git diff --name-only origin/validate_wheel_on_pr...HEAD -- '*.sh'
+      script:
         - |
           # Get the list of modified .sh files
-          MODIFIED_FILES=$(git diff --name-only origin/main...HEAD -- '*.sh')
+          MODIFIED_FILES=$(git diff --name-only origin/validate_wheel_on_pr...HEAD -- '*.sh')
 
           if [[ -z "$MODIFIED_FILES" ]]; then
             echo "No build script modifications detected."
@@ -63,6 +69,3 @@ jobs:
               echo "No build_info.json found in $PACKAGE_DIR"
             fi
           done
-      script:
-        - echo "wheel build python 3.12"
-        #- chmod +x ./script/build_wheels.sh; bash ./script/build_wheels.sh;
