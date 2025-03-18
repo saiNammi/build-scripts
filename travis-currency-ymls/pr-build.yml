@@ -11,16 +11,6 @@ before_install:
     - docker pull registry.access.redhat.com/ubi9/ubi:9.3
 
 
-# script:
-#     - sudo apt update -y && sudo apt-get install file -y
-#     #- pip3 install --upgrade requests
-#     - pip3 install --force-reinstall -v "requests==2.31.0"
-#     - pip3 install --upgrade docker
-#     - python3 script/validate_builds.py $TRAVIS_PULL_REQUEST > build_log &
-#     - SCRIPT_PID=$!;while ps -p $SCRIPT_PID > /dev/null;do echo "$SCRIPT_PID is running"; sleep 300; done; wait $SCRIPT_PID; my_pid_status=$?;
-#     - build_size=$(stat -c %s build_log);[ $build_size -lt 1800000 ] && cat build_log || { echo "xxxxxxxxxxxxxxx Build log size too large, so printing last 1.7MB xxxxxxxxxxxxxxx"; tail -c 1700000 build_log; }; travis_terminate $my_pid_status
-
-
 jobs:
   include:
     # - stage: pr_builds
@@ -48,17 +38,28 @@ jobs:
 
           for file in $MODIFIED_FILES; do
             PACKAGE_DIR=$(dirname "$file")
-            BUILD_SCRIPT_PATH=$(realpath "$file")
+            BUILD_SCRIPT_PATH=$PACKAGE_DIR/"$file"
             BUILD_INFO_FILE="$PACKAGE_DIR/build_info.json"
+
+            echo "----------------------------------"
+            echo "Build Script: $BUILD_SCRIPT_PATH"
+            echo "Package Directory: $PACKAGE_DIR"
 
             if [[ -f "$BUILD_INFO_FILE" ]]; then
               VERSION=$(jq -r '.version' "$BUILD_INFO_FILE")
-              echo "Build Script: $BUILD_SCRIPT_PATH"
-              echo "Package Directory: $PACKAGE_DIR"
+              WHEEL_BUILD=$(jq -r '.wheel_build' "$BUILD_INFO_FILE")
+
               echo "Version: $VERSION"
+              echo "Wheel Build: $WHEEL_BUILD"
+
+              if [[ "$WHEEL_BUILD" == "false" ]]; then
+                echo "Skipping $PACKAGE_DIR as wheel_build is set to false."
+                continue
+              fi
+
+              # Proceed with further steps (e.g., triggering builds)
+              echo "Processing $PACKAGE_DIR..."
             else
-              echo "Build Script: $BUILD_SCRIPT_PATH"
-              echo "Package Directory: $PACKAGE_DIR"
               echo "No build_info.json found in $PACKAGE_DIR"
             fi
           done
