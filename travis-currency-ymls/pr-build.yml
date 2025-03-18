@@ -39,7 +39,7 @@ jobs:
       before_script:
         - |
           # Get the list of modified .sh files
-          MODIFIED_FILES=$(git diff --name-only origin/main...HEAD -- '*.sh')
+          MODIFIED_FILES=$(git diff --name-only origin/validate_wheel_on_pr...HEAD -- '*.sh')
 
           if [[ -z "$MODIFIED_FILES" ]]; then
             echo "No build script modifications detected."
