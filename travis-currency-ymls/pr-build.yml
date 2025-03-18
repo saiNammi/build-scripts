@@ -36,6 +36,8 @@ jobs:
     - stage: pr_builds
       name: "Create Wheel for Python 3.12"
       env: PYTHON_VERSION="3.12"
+      before_script:
+        - git diff --name-only origin/validate_wheel_on_pr...HEAD -- '*.sh'
       script:
         - |
           # Get the list of modified .sh files
