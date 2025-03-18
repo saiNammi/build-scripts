@@ -4,6 +4,9 @@ dist: focal
 os: linux
 language: shell
 
+git:
+  depth: false
+
 services:
     - docker
 
