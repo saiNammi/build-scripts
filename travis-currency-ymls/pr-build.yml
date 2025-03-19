@@ -11,6 +11,7 @@ services:
     - docker
 
 before_install:
+    - sudo apt install -y jq; jq --version
     - docker pull registry.access.redhat.com/ubi9/ubi:9.3
 
 
@@ -50,8 +51,13 @@ jobs:
               WHEEL_BUILD=$(git show HEAD:"$BUILD_INFO_FILE" | jq -r '.wheel_build')
             elif [[ -f "$BUILD_INFO_FILE" ]]; then
               echo "Using existing build_info.json"
+              echo "Checking file: $BUILD_INFO_FILE"
+              cat "$BUILD_INFO_FILE"  # Debug: Print file content
+                
               VERSION=$(jq -r '.version' "$BUILD_INFO_FILE")
               WHEEL_BUILD=$(jq -r '.wheel_build' "$BUILD_INFO_FILE")
+              echo "Extracted Version: $VERSION"
+              echo "Extracted Wheel Build: $WHEEL_BUILD"
             else
               echo "No build_info.json found in $PACKAGE_DIR"
               continue
