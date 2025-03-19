@@ -20,6 +20,7 @@ fi
 for script in $MODIFIED_SCRIPTS; do
   echo "printing script path $script"
   PACKAGE_DIR=$(dirname "$script")
+  BUILD_SCRIPT_NAME=$(basename "$script")
   BUILD_SCRIPT_PATH="$(pwd)/$script"
   BUILD_INFO_FILE="$(pwd)/$PACKAGE_DIR/build_info.json"
 
@@ -65,8 +66,8 @@ for script in $MODIFIED_SCRIPTS; do
   fi
 
   # Append variables to variable.sh
-  echo "export PKG_DIR_PATH=\"$(pwd)/\"" >> "$VARIABLE_FILE"
-  echo "export BUILD_SCRIPT=$script" >> "$VARIABLE_FILE"
+  echo "export PKG_DIR_PATH=$PACKAGE_DIR/" >> "$VARIABLE_FILE"
+  echo "export BUILD_SCRIPT=$BUILD_SCRIPT_NAME" >> "$VARIABLE_FILE"
   echo "export VERSION=$VERSION" >> "$VARIABLE_FILE"
   echo "export NON_ROOT_BUILD=$nonRootBuild" >> "$VARIABLE_FILE"
   echo "export TESTED_ON=$tested_on" >> "$VARIABLE_FILE"
