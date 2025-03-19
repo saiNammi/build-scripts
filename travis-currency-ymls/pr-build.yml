@@ -37,7 +37,7 @@ jobs:
           for script in $MODIFIED_SCRIPTS; do
             PACKAGE_DIR=$(dirname "$script")
             BUILD_SCRIPT_PATH=$(pwd)/"$script"
-            BUILD_INFO_FILE="$PACKAGE_DIR/build_info.json"
+            BUILD_INFO_FILE="$(pwd)/$PACKAGE_DIR/build_info.json"
 
             echo "----------------------------------"
             echo "Build Script: $BUILD_SCRIPT_PATH"
