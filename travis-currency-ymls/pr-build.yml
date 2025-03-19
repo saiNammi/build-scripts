@@ -30,4 +30,6 @@ jobs:
         - echo "$PKG_DIR_PATH"
         - echo "$BUILD_SCRIPT"
         - echo "$VERSION"
+        - echo "$NON_ROOT_BUILD"
+        - echo "$TESTED_ON"
         - chmod +x ./script/build_wheels.sh; bash ./script/build_wheels.sh;
