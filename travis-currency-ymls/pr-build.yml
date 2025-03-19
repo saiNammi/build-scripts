@@ -25,4 +25,9 @@ jobs:
         - chmod +x script/check_build_scripts.sh
         - script/check_build_scripts.sh
       script:
-        - "In script block"
+        - echo "wheel build python 3.12"
+        - source script/variable.sh
+        - echo "$PKG_DIR_PATH"
+        - echo "$BUILD_SCRIPT"
+        - echo "$VERSION"
+        - chmod +x ./script/build_wheels.sh; bash ./script/build_wheels.sh;

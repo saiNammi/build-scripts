@@ -3,6 +3,8 @@
 # Fail on any error
 set -e
 
+VARIABLE_FILE="script/variable.sh"
+
 # Fetch modified build scripts
 MODIFIED_SCRIPTS=$(git diff --name-only origin/validate_wheel_on_pr...HEAD -- '*.sh')
 
@@ -16,6 +18,7 @@ if [[ -z "$MODIFIED_SCRIPTS" ]]; then
 fi
 
 for script in $MODIFIED_SCRIPTS; do
+  echo "printing script path $script"
   PACKAGE_DIR=$(dirname "$script")
   BUILD_SCRIPT_PATH="$(pwd)/$script"
   BUILD_INFO_FILE="$(pwd)/$PACKAGE_DIR/build_info.json"
@@ -50,6 +53,13 @@ for script in $MODIFIED_SCRIPTS; do
     echo "wheel_build is set to false. Exiting Travis job."
     exit 0
   fi
+
+  # Append variables to variable.sh
+  echo "export PKG_DIR_PATH=\"$(pwd)/\"" >> "$VARIABLE_FILE"
+  echo "export BUILD_SCRIPT=\"$script\"" >> "$VARIABLE_FILE"
+  echo "export VERSION=\"$VERSION\"" >> "$VARIABLE_FILE"
+
+  chmod +x script/variable.sh
 
   # Proceed with further steps
   echo "Processing $PACKAGE_DIR..."
