@@ -5,11 +5,13 @@ set -e
 
 VARIABLE_FILE="script/variable.sh"
 
+CURRENT_BRANCH="${TRAVIS_BRANCH:-master}"
+
 # Fetch modified build scripts
-MODIFIED_SCRIPTS=$(git diff --name-only origin/validate_wheel_on_pr...HEAD -- '*.sh')
+MODIFIED_SCRIPTS=$(git diff --name-only origin/$CURRENT_BRANCH...HEAD -- '*.sh')
 
 # Fetch modified build_info.json files
-MODIFIED_JSONS=$(git diff --name-only origin/validate_wheel_on_pr...HEAD -- '*/build_info.json')
+MODIFIED_JSONS=$(git diff --name-only origin/$CURRENT_BRANCH...HEAD -- '*/build_info.json')
 
 # Exit if no build scripts are modified
 if [[ -z "$MODIFIED_SCRIPTS" ]]; then
