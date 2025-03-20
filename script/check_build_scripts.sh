@@ -51,6 +51,9 @@ for script in $MODIFIED_SCRIPTS; do
     VERSION=$(git show HEAD:"$BUILD_INFO_FILE" | jq -r '.version')
     WHEEL_BUILD=$(git show HEAD:"$BUILD_INFO_FILE" | jq -r '.wheel_build')
     nonRootBuild=$(git show HEAD:"$BUILD_INFO_FILE" | jq -r '.use_non_root_user')
+    echo "Extracted Version: $VERSION"
+    echo "Extracted Wheel Build: $WHEEL_BUILD"
+    echo "Extracted nonRootbuild: $nonRootBuild"
 
   elif [[ -f "$BUILD_INFO_FILE" ]]; then
     echo "Using existing build_info.json"
