@@ -11,13 +11,19 @@ CURRENT_BRANCH="${TRAVIS_BRANCH:-master}"
 MODIFIED_SCRIPTS=$(git diff --name-only origin/$CURRENT_BRANCH...HEAD -- '*.sh')
 
 # Fetch modified build_info.json files
-MODIFIED_JSONS=$(git diff --name-only origin/$CURRENT_BRANCH...HEAD -- '*/build_info.json')
+MODIFIED_JSONS=$(git diff --name-only origin/$CURRENT_BRANCH...HEAD -- '*.json')
 
 # Exit if no build scripts are modified
 if [[ -z "$MODIFIED_SCRIPTS" ]]; then
   echo "No build script modifications detected. Exiting Travis job."
   exit 0
 fi
+
+# check for modified build_info.json.
+if [[ -z "$MODIFIED_JSONS" ]]; then
+  echo "No build_info.json modifications detected."
+fi
+
 
 for script in $MODIFIED_SCRIPTS; do
   echo "printing script path $script"
