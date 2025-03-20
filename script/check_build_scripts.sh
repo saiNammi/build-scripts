@@ -46,7 +46,7 @@ for script in $MODIFIED_SCRIPTS; do
 
 
   # Check if build_info.json is modified
-  if echo "$MODIFIED_JSONS" | grep -q "$BUILD_INFO_FILE"; then
+  if echo "$MODIFIED_JSONS" | grep -q "$(basename "$BUILD_INFO_FILE")"; then
     echo "Using modified build_info.json"
     VERSION=$(git show HEAD:"$BUILD_INFO_FILE" | jq -r '.version')
     WHEEL_BUILD=$(git show HEAD:"$BUILD_INFO_FILE" | jq -r '.wheel_build')
